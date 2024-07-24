@@ -1,67 +1,82 @@
 
-document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-        endLoader();
-    }, 300);
-    //endLoader();
-});
-
-function endLoader() {
-    const content = document.getElementById("gallery");
-    setTimeout(function() {
-        content.classList.replace('hidden','appear-animation'); 
-    }, 50); 
-}
 
 
+const thumbnailsContainer = document.getElementById('gallery-container');
+const modal = document.getElementById('modal');
+const modalImage = document.getElementById('modal-image');
+const closeModal = document.getElementById('close');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
 
+let images = [];
+let currentIndex = 0;
 
-async function fetchRepoImages(owner, repo) {
-    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/`;
+async function fetchImages(repo) {
     try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        const repoURL = `https://api.github.com/repos/Lumieres-Emergentes/${repo}/contents/`;
+        const response = await fetch(repoURL);
         const data = await response.json();
-        return data.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file.name));
+        images = data.filter(item => item.type === 'file' && /\.(jpg|jpeg|png|gif)$/.test(item.name));
+        displayThumbnails();
     } catch (error) {
-        console.error('Error fetching the repo contents:', error);
-        return [];
+        console.error('Error fetching images:', error);
     }
 }
 
-function generateImageTags(images) {
-    const container = document.getElementById('images-container');
-    images.forEach(image => {
-        const imgElement = document.createElement('img');
-        imgElement.src = image.download_url;
-        imgElement.alt = image.name;
-        imgElement.style.height = '300px'; 
-        imgElement.style.margin = '10px'; 
-        container.appendChild(imgElement);
-    });
-}
-
 (async function() {
-    const owner = 'Lumieres-Emergentes';
     const currentPage = window.location.pathname.split('/').pop();
     const repo = (currentPage === '' || currentPage === 'index.html') ? 'L-E_General' : 'L-E_Cars';
-    const images = await fetchRepoImages(owner, repo);
-    generateImageTags(images);
+    fetchImages(repo);
 })();
 
 
-function adjustContentPadding() {
-    const header = document.getElementById('header');
-    const content = document.getElementById('main');
-    const headerHeight = header.offsetHeight;
-    content.style.paddingTop = headerHeight + 'px';
+
+function displayThumbnails() {
+    images.forEach((image, index) => {
+        const thumbnailDiv = document.createElement('div');
+        thumbnailDiv.classList.add('thumbnail');
+        thumbnailDiv.innerHTML = `<img src="${image.download_url}" alt="${image.name}" data-index="${index}">`;
+        thumbnailsContainer.appendChild(thumbnailDiv);
+    });
 }
 
-window.addEventListener('load', adjustContentPadding);
-window.addEventListener('resize', adjustContentPadding);
+function openModal(index) {
+    currentIndex = index;
+    modalImage.src = images[index].download_url;
+    modal.style.display = 'flex';
+}
 
+function closeModalFn() {
+    modal.style.display = 'none';
+}
 
+function showPrev() {
+    currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+    modalImage.src = images[currentIndex].download_url;
+}
 
+function showNext() {
+    currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+    modalImage.src = images[currentIndex].download_url;
+}
+
+thumbnailsContainer.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG') {
+        openModal(parseInt(e.target.dataset.index));
+    }
+});
+
+closeModal.addEventListener('click', closeModalFn);
+prevBtn.addEventListener('click', showPrev);
+nextBtn.addEventListener('click', showNext);
+
+window.addEventListener('keydown', (e) => {
+    if (modal.style.display === 'flex') {
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'Escape') closeModalFn();
+    }
+});
+
+fetchImages();
 

@@ -13,9 +13,9 @@
     <link href="styles/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <div class="wrapper">
-      <div id="content">
-        <header id="header">
+    <div>
+      <div>
+        <header>
           <!-- Title -->
           <div>
             <p class="title">Lumières émergentes</p>
@@ -23,17 +23,25 @@
           <!-- Menu -->
           <div class="menu">
             <a href="index.html">Galerie Photo</a>
-            <a href="#/.html">Galerie Automobile</a>
+            <a href="#/">Galerie Automobile</a>
             <a href="contact.html">Contact</a>  
             <br/>
             <br/>
           </div>  
         </header>
-        <!-- Galerie -->
-        <main id="main">
-          <section id="gallery" class="hidden">
-            <div id="images-container"></div>
-          </section>
+        <!-- Gallery -->
+        <main>
+          <div id="gallery">
+            <div id="gallery-container"></div>
+            <div class="modal" id="modal">
+              <span class="close" id="close">&times;</span>
+              <span class="prev" id="prev">&#10094;</span>
+              <div class="modal-content" id="modal-content">
+                  <img id="modal-image" src="" alt="">
+              </div>
+              <span class="next" id="next">&#10095;</span>
+            </div>
+          </div>
         </main>
         <!-- Footer -->
         <footer>
@@ -41,8 +49,7 @@
           <div>
             <h7>&copy; Lumières émergentes 2024</h7>
           </div>
-        </footer>
-        
+        </footer> 
       </div>
     </div>
     <script src="scripts/script.js"></script>
