@@ -1,0 +1,156 @@
+body {
+    scroll-behavior: smooth; /* ???? */
+    color: #151A20;
+    background-color: #EEEEF0;
+    font-family: "Protest Strike", sans-serif;
+    font-weight: normal;
+    font-style: normal
+}
+
+.hidden {
+    display: none;
+}
+
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #EEEEF0;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1000; 
+}
+
+.title {
+    text-align: center;
+    font-size: 5em;
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+.menu {
+    text-align: center;
+    top: 3em;
+    margin: 0%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+a {
+    outline: none;
+    text-decoration: none;
+    color: #000;/* #EEEEF0; */
+    padding-bottom: 2px;
+}
+
+.menu > a {
+    margin: 0 10px 0 10px;
+    padding: 2px 5px 1px !important;
+}
+
+a:link, a:visited { 
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    border-bottom: 1px solid;
+    background: #EEEEF0;
+    transition: all 1s;
+    border-radius: 2%;
+    color: #151A20;
+}
+
+a:active {
+    background: #AAAA90;
+}
+
+
+#main {
+    padding-top: 0px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1;
+}
+
+
+#images-container {
+    display: inline-flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#images-container > img {
+    border-radius: 5px;
+}
+
+
+footer > div {
+    text-align: center;
+    margin-bottom: 15px;   
+}
+
+.centrer {
+    text-align: center;
+}
+
+.icone {
+    border-bottom: 0px !important;
+    margin: 10px;
+}
+
+.icone:hover > img {
+    transform: scale(1.2);
+    transition: all .4s ease-out;
+}
+
+.insta {
+    display: inline-flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center ;
+}
+
+
+.spinny {
+    animation: rotate 5s linear infinite;
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Animation d'apparition */
+@keyframes appear {
+    0% {
+        opacity: 0;
+        /*transform: scale(0);*/
+    }
+    100% {
+        opacity: 1;
+        /*transform: scale(1);*/
+    }
+}
+.appear-animation {
+    /*display: block;*/
+    animation: appear 1s ease forwards;
+}
