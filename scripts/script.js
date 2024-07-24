@@ -34,8 +34,8 @@ async function fetchImages(repo) {
 function displayThumbnails() {
     images.forEach((image, index) => {
         const thumbnailDiv = document.createElement('div');
-        thumbnailDiv.classList.add('thumbnail');
-        thumbnailDiv.innerHTML = `<img src="${image.download_url}" alt="${image.name}" data-index="${index}">`;
+        //thumbnailDiv.classList.add('thumbnail');
+        thumbnailDiv.innerHTML = `<img src="${image.download_url}" alt="${image.name}" class='thumbnail' data-index="${index}">`;
         thumbnailsContainer.appendChild(thumbnailDiv);
     });
 }

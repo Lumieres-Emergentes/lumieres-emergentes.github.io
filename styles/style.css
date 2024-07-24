@@ -69,7 +69,6 @@ a:active {
 
 .thumbnail {
     height: 200px;
-    width: auto;
     overflow: hidden;
     border-radius: 8px;
     margin: 10px;
