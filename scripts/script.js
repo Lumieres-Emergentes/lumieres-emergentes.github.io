@@ -36,19 +36,10 @@ function displayThumbnails() {
         setTimeout(() => {
             const image = images[i];
             const thumbnailDiv = document.createElement('div');
-            //thumbnailDiv.classList.add('thumbnail');
             thumbnailDiv.innerHTML = `<img src="${image.download_url}" class="thumbnail" alt="${image.name}" data-index="${i}">`;
             thumbnailsContainer.appendChild(thumbnailDiv);
         }, i * 200); // Délai de 200ms entre chaque itération
     }
-    
-    /*images.forEach((image, index) => {
-        const thumbnailDiv = document.createElement('div');
-        //thumbnailDiv.classList.add('thumbnail');
-        thumbnailDiv.innerHTML = `<img src="${image.download_url}" class="thumbnail" alt="${image.name}" data-index="${index}">`;
-        thumbnailsContainer.appendChild(thumbnailDiv);
-        
-    });*/
 }
 
 function openModal(index) {
