@@ -16,7 +16,7 @@ async function fetchImages(repo) {
         const repoURL = `https://api.github.com/repos/Lumieres-Emergentes/${repo}/contents/`;
         const response = await fetch(repoURL);
         const data = await response.json();
-        images = data.filter(item => item.type === 'file' && /\.(jpg|jpeg|png|gif)$/.test(item.name));
+        images = data.filter(item => item.type === 'file' && /\.(jpg|JPG|jpeg|JPEG|png|PNG)$/.test(item.name));
         displayThumbnails();
     } catch (error) {
         console.error('Error fetching images:', error);
